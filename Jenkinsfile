@@ -6,13 +6,13 @@ pipeline {
      stages {
           stage("Docker build") {
                steps {
-                    sh "docker build -t leszko/hello-service:${BUILD_NUMBER} ."
+                    sh "docker build -t imarif28/hello-service:${BUILD_NUMBER} ."
                }
           }
 
           stage("Docker push") {
                steps {
-                    sh "docker push leszko/hello-service:${BUILD_NUMBER}"
+                    sh "docker push imarif28/hello-service:${BUILD_NUMBER}"
                }
           }
 
