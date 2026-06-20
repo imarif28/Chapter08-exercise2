@@ -27,7 +27,7 @@ pipeline {
           
           stage("Deploy to staging") {
                steps {
-                    sh "kubectl config use-context staging"
+                    sh "kubectl config use-context kind-staging"
                     sh "kubectl apply -f deployment.yaml"
                }
           }
