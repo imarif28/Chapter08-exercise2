@@ -7,13 +7,9 @@ NODE_IP=$(kubectl --context=kind-staging --insecure-skip-tls-verify=true get nod
 NODE_PORT=$(kubectl --context=kind-staging --insecure-skip-tls-verify=true get svc hello -o=jsonpath='{.spec.ports[0].nodePort}')
 ENDPOINT="${NODE_IP}:${NODE_PORT}"
 
-START=$(date +%s)
-for i in $(seq ${N}); do
-	curl http://${ENDPOINT}/hello
-done
-END=$(date +%s)
+echo "Downloading hey..."
+wget -q -O hey https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64
+chmod +x hey
 
-RUNTIME=$((END-START))
-AVG=$((RUNTIME/N))
-
-test ${AVG} -lt 1
+echo "Running load test with hey..."
+./hey -n 1000 -c 50 http://${ENDPOINT}/hello

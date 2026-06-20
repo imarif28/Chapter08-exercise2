@@ -12,8 +12,7 @@ pipeline {
 
           stage("Docker push") {
                steps {
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                         sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+                    withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
                          sh "docker push imarif28/chapter08-exercise2:${BUILD_NUMBER}"
                     }
                }
