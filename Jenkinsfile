@@ -6,19 +6,19 @@ pipeline {
      stages {
           stage("Docker build") {
                steps {
-                    sh "docker build -t leszko/hello-service:${BUILD_TIMESTAMP} ."
+                    sh "docker build -t leszko/hello-service:${BUILD_NUMBER} ."
                }
           }
 
           stage("Docker push") {
                steps {
-                    sh "docker push leszko/hello-service:${BUILD_TIMESTAMP}"
+                    sh "docker push leszko/hello-service:${BUILD_NUMBER}"
                }
           }
 
           stage("Update version") {
                steps {
-                    sh "sed  -i 's/{{VERSION}}/${BUILD_TIMESTAMP}/g' deployment.yaml"
+                    sh "sed  -i 's/{{VERSION}}/${BUILD_NUMBER}/g' deployment.yaml"
                }
           }
           
