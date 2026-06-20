@@ -6,7 +6,7 @@ pipeline {
      stages {
           stage("Docker build") {
                steps {
-                    sh "docker build -t imarif28/Chapter08-exercise2:${BUILD_NUMBER} ."
+                    sh "docker build -t imarif28/chapter08-exercise2:${BUILD_NUMBER} ."
                }
           }
 
@@ -14,7 +14,7 @@ pipeline {
                steps {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                          sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                         sh "docker push imarif28/Chapter08-exercise2:${BUILD_NUMBER}"
+                         sh "docker push imarif28/chapter08-exercise2:${BUILD_NUMBER}"
                     }
                }
           }

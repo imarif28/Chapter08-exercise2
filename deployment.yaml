@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hello
-        image: imarif28/hello-service:{{VERSION}}
+        image: imarif28/chapter08-exercise2:{{VERSION}}
         ports:
         - containerPort: 5000
 
