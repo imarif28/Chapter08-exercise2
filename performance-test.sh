@@ -8,7 +8,7 @@ NODE_PORT=$(kubectl --context=kind-staging --insecure-skip-tls-verify=true get s
 ENDPOINT="${NODE_IP}:${NODE_PORT}"
 
 echo "Downloading hey..."
-wget -q -O hey https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64
+curl -fsSL -o hey https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64
 chmod +x hey
 
 echo "Running load test with hey..."
