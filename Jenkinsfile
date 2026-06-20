@@ -35,8 +35,10 @@ pipeline {
 
           stage("Performance test") {
                steps {
-                    sleep 20
-                    sh "chmod +x performance-test.sh && ./performance-test.sh"
+                    withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                         sleep 20
+                         sh "chmod +x performance-test.sh && ./performance-test.sh"
+                    }
                }
           }
      }
