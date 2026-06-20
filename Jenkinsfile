@@ -28,7 +28,7 @@ pipeline {
           stage("Deploy to staging") {
                steps {
                     sh "kubectl config use-context kind-staging"
-                    sh "kubectl apply -f deployment.yaml"
+                    sh "kubectl --insecure-skip-tls-verify=true apply -f deployment.yaml"
                }
           }
 
