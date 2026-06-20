@@ -27,8 +27,10 @@ pipeline {
           
           stage("Deploy to staging") {
                steps {
-                    sh "kubectl config use-context kind-staging"
-                    sh "kubectl --insecure-skip-tls-verify=true apply -f deployment.yaml"
+                    withCredentials([file(credentialsId: 'config-jenkins', variable: 'KUBECONFIG')]) {
+                         sh "kubectl config use-context kind-staging"
+                         sh "kubectl --insecure-skip-tls-verify=true apply -f deployment.yaml"
+                    }
                }
           }
 
